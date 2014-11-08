@@ -5,6 +5,18 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    QString msgFmt =
+            "          QuickDec2Hex V" APP_REVISION " Build@%1      \n"
+            "    This software is for quickly convert decimal numbers\n"
+            "to hex numbers or in verse convert from hex to decimal.\n"
+            "--------------------------------------------------------\n"
+            "Author: QuNengrong(Neo Nengrong Qu)\n"
+            "Email : Quner612#qq.com  \n"
+            "--------------------------------------------------------\n"
+            "Copyright (c) 2014, Copyleft follow LGPL 3.0.";
+    QString date = QDate::currentDate().toString(Qt::ISODate);
+    _strMsgAboutSoftware = QString(msgFmt).arg(date);
+
     ui->setupUi(this);
     ui->lineEdit_dec->setValidator(new QIntValidator());
     QRegExp reHex("(0[Xx])?[A-Fa-f0-9]*");
@@ -50,4 +62,11 @@ void MainWindow::on_lineEdit_hex_textChanged(const QString &arg1)
     {
         on_pushButtonConvertHex2Dec_clicked();
     }
+}
+
+void MainWindow::on_action_About_triggered()
+{
+    QMessageBox::about(this,
+                       "About "APP_NAME,
+                       _strMsgAboutSoftware);
 }

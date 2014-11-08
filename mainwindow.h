@@ -2,6 +2,11 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QMessageBox>
+#include <QDate>
+
+#define APP_NAME "QuickDec2Hex"
+#define APP_REVISION "1.0.0"
 
 namespace Ui {
 class MainWindow;
@@ -26,8 +31,11 @@ private slots:
 
     void on_lineEdit_hex_textChanged(const QString &arg1);
 
+    void on_action_About_triggered();
+
 private:
     Ui::MainWindow *ui;
+    QString _strMsgAboutSoftware;
 };
 
 #endif // MAINWINDOW_H
