@@ -35,6 +35,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    qlonglong _sharedNumberValue;
     QString _strMsgAboutSoftware;
 };
 
