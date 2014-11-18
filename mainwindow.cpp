@@ -22,9 +22,9 @@ MainWindow::MainWindow(QWidget *parent) :
     _sharedNumberValue = 0;
 
     ui->setupUi(this);
-    QRegExp reDec("[0-9]{0,19}"); //max is 9223372036854775807
+    QRegExp reDec("[0-9]{0,19}\\s*"); //max is 9223372036854775807
     ui->lineEdit_dec->setValidator(new QRegExpValidator(reDec));
-    QRegExp reHex("(0[Xx])?0*[A-Fa-f0-9]{0,15}"); // max is 0x7fffffffffffffff
+    QRegExp reHex("(0[Xx])?0*[A-Fa-f0-9]{0,15}\\s*"); // max is 0x7fffffffffffffff
     ui->lineEdit_hex->setValidator(new QRegExpValidator(reHex));
     ui->checkBox_autoConvert->toggled(true);
     ui->pushButtonConvertDec2Hex->setFocus();
