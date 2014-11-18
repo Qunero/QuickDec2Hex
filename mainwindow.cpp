@@ -35,6 +35,18 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::updateUiFromDec2Hex()
+{
+    QString hex = QString::number(_sharedNumberValue, 16);
+    ui->lineEdit_hex->setText("0X" + hex.toUpper());
+}
+
+void MainWindow::updateUiFromHex2Dec()
+{
+    QString dec = QString::number(_sharedNumberValue, 10);
+    ui->lineEdit_dec->setText(dec.toUpper());
+}
+
 void MainWindow::on_checkBox_autoConvert_toggled(bool checked)
 {
     ui->pushButtonConvertDec2Hex->setVisible(!checked);
@@ -43,14 +55,15 @@ void MainWindow::on_checkBox_autoConvert_toggled(bool checked)
 
 void MainWindow::on_pushButtonConvertDec2Hex_clicked()
 {
-    QString hex = QString::number(_sharedNumberValue, 16);
-    ui->lineEdit_hex->setText("0X" + hex.toUpper());
+    _sharedNumberValue = ui->lineEdit_dec->text().toLongLong(NULL, 10);
+    updateUiFromDec2Hex();
 }
 
 void MainWindow::on_pushButtonConvertHex2Dec_clicked()
 {
-    QString dec = QString::number(_sharedNumberValue, 10);
-    ui->lineEdit_dec->setText(dec.toUpper());
+    _sharedNumberValue = ui->lineEdit_hex->text().toLongLong(NULL, 16);
+    updateUiFromHex2Dec();
+
 }
 
 void MainWindow::on_lineEdit_dec_textChanged(const QString &arg1)
@@ -59,7 +72,7 @@ void MainWindow::on_lineEdit_dec_textChanged(const QString &arg1)
             && ui->checkBox_autoConvert->isChecked())
     {
         _sharedNumberValue = arg1.toLongLong(0, 10);
-        on_pushButtonConvertDec2Hex_clicked();
+        updateUiFromDec2Hex();
     }
 }
 
@@ -69,7 +82,7 @@ void MainWindow::on_lineEdit_hex_textChanged(const QString &arg1)
             && ui->checkBox_autoConvert->isChecked())
     {
         _sharedNumberValue = arg1.toLongLong(0, 16);
-        on_pushButtonConvertHex2Dec_clicked();
+        updateUiFromHex2Dec();
     }
 }
 

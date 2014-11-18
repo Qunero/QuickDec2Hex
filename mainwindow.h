@@ -37,6 +37,9 @@ private:
     Ui::MainWindow *ui;
     qlonglong _sharedNumberValue;
     QString _strMsgAboutSoftware;
+
+    void updateUiFromDec2Hex();
+    void updateUiFromHex2Dec();
 };
 
 #endif // MAINWINDOW_H
